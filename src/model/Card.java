@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
  * Card class 
  */
 
-public class Card  {
+public class Card {
 	//***************************************** Variables *********************************************
 	/**picture cards*/
 	protected ImageIcon cardPic;	
