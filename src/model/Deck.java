@@ -82,7 +82,6 @@ public class Deck {
 	 * Constructor.  Create an unshuffled deck of cards.
 	 */  
 	public Deck () {
-            System.out.println("This is the path: "+getClass().getResource("/resources/3d.jpg"));
 		this.deck = new ArrayList<Card>();
 		this.cards = new ArrayList<ImageIcon>();
 		addCardImg();

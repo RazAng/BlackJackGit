@@ -16,6 +16,7 @@ public class Game  {
 	private Player player;
 	/**deck of cards */
 	private Deck deck;	
+
 	
 	//***************************************** Constructors ******************************************
 	/**class contractor*/
@@ -24,7 +25,7 @@ public class Game  {
 		this.player=new Player(new Hand());
 		this.deck=new Deck();		 
 	}
-	//***************************************** Methods ***********************************************
+	//***************************************** Getters and Setters ************************************
 	
 	/**get dealer method
 	 * @return dealer
@@ -46,6 +47,10 @@ public class Game  {
 	public Deck  getDeck() {
 		return this.deck;
 	} 
+	/**get roundCount 
+	 * @return roundCount
+	 */
+
 	/*******************************************************************************
     new Game method - start new game- all records of previous game will be deleted* 
     ********************************************************************************/
