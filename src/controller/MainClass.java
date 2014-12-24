@@ -3,7 +3,7 @@ package controller;
 /**
  * The main class of the system. 
  */
-public class  MainClass {
+public class MainClass {
 	/**ControllerLogic reference pointer*/
 	private static ControllerLogic controller;
 
