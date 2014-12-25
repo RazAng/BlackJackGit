@@ -91,8 +91,6 @@ public class Gui extends javax.swing.JFrame {
 		movingTimer3=new Timer(DELAY, new TimerHandler2());
 		movingTimer4=new Timer(DELAY, new TimerHandler3());
 		lableTimer= new Timer(15, new TimerHandler4());
-	
-
 	}
 
 	/**
@@ -228,6 +226,8 @@ public class Gui extends javax.swing.JFrame {
 		dealercard0 = new javax.swing.JLabel();
 		dealercard2 = new javax.swing.JLabel();
 		winLoseLabel = new javax.swing.JLabel();
+		winLoseLabel2 = new javax.swing.JLabel();
+		winLoseLabel3 = new javax.swing.JLabel();
 		newGameLabel = new javax.swing.JLabel();
 		newGameLabel2 = new javax.swing.JLabel();
 		
@@ -306,6 +306,20 @@ public class Gui extends javax.swing.JFrame {
 		winLoseLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		gamePanel.add(winLoseLabel);
 		winLoseLabel.setBounds(510, 250, 130, 80);
+		
+		winLoseLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		winLoseLabel2.setForeground(new java.awt.Color(255, 255, 255));
+		winLoseLabel2.setText("");	
+		winLoseLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		gamePanel.add(winLoseLabel2);
+		winLoseLabel2.setBounds(320, 280, 500, 80);
+		
+		winLoseLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		winLoseLabel3.setForeground(new java.awt.Color(255, 255, 255));
+		winLoseLabel3.setText("");	
+		winLoseLabel3.setHorizontalAlignment(SwingConstants.CENTER);
+		gamePanel.add(winLoseLabel3);
+		winLoseLabel3.setBounds(320, 300, 500, 80);
 		
 		newGameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 		newGameLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -465,6 +479,8 @@ public class Gui extends javax.swing.JFrame {
 		hitButton.setEnabled(false);
 		standButton.setEnabled(false);
 		winLoseLabel.setText("");
+		winLoseLabel2.setText("");
+		winLoseLabel3.setText("");
 		newGameLabel.setText("");
 		jTextPane3.setText("");
 		jTextPane4.setText("");
@@ -488,6 +504,8 @@ public class Gui extends javax.swing.JFrame {
 		newGameInstance.resetRound();
 		newGameInstance.setRoundCount(newGameInstance.getRoundCount()+1);
 		winLoseLabel.setText("");
+		winLoseLabel2.setText("");
+		winLoseLabel3.setText("");
 		newGameLabel.setText("");
 		newGameLabel2.setText("");
 		jTextPane3.setText(""+newGameInstance.getRoundCount());
@@ -636,6 +654,8 @@ public class Gui extends javax.swing.JFrame {
 			//animate winLose label
 			lableSize=0;
 			winLoseLabel.setText("Bust");
+			winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
+			winLoseLabel3.setText("If you what to start a new game, please click on 'NewGame' button");
 			enlargeLable();
 			lableTimer.start();			
 			repaint();
@@ -699,6 +719,8 @@ public class Gui extends javax.swing.JFrame {
 		jTextPane2.setText(""+newGameInstance.calculateScore(newGameInstance.getRoundCount(), newGameInstance.getPlayer().getHandSum(newGameInstance.getPlayer()), newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer())));
 		//animate win-lose label
 		winLoseLabel.setText(newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()));
+		winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
+		winLoseLabel3.setText("If you what to start a new game, please click on 'NewGame' button");
 		lableSize=0;
 		enlargeLable();
 		lableTimer.start();
@@ -773,6 +795,8 @@ public class Gui extends javax.swing.JFrame {
 	private javax.swing.JScrollPane winsPane;
 	private javax.swing.JLabel winslable;
 	private javax.swing.JLabel winLoseLabel;
+	private javax.swing.JLabel winLoseLabel2;
+	private javax.swing.JLabel winLoseLabel3;
 	private javax.swing.JLabel newGameLabel;
 	private javax.swing.JLabel newGameLabel2;
 	
