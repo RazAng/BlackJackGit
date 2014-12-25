@@ -1,10 +1,14 @@
 package view;
 
 import javax.swing.*;
+
+
 import controller.ControllerLogic;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+
 import model.Card;
 import model.Game;
 import model.Hand;
@@ -44,7 +48,7 @@ public class Gui extends javax.swing.JFrame {
 	private Timer movingTimer3;
 	private Timer movingTimer4;
 
-	int DELAY = 15; 
+	int DELAY = 18; 
 	int startY = 130;
 	int startX = 920;
 	int startY1 = 130;
@@ -224,7 +228,9 @@ public class Gui extends javax.swing.JFrame {
 		dealercard0 = new javax.swing.JLabel();
 		dealercard2 = new javax.swing.JLabel();
 		winLoseLabel = new javax.swing.JLabel();
-
+		newGameLabel = new javax.swing.JLabel();
+		newGameLabel2 = new javax.swing.JLabel();
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Black Jack");
 		setMinimumSize(null);
@@ -300,6 +306,20 @@ public class Gui extends javax.swing.JFrame {
 		winLoseLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		gamePanel.add(winLoseLabel);
 		winLoseLabel.setBounds(510, 250, 130, 80);
+		
+		newGameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		newGameLabel.setForeground(new java.awt.Color(255, 255, 255));
+		newGameLabel.setText("");	
+		newGameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		gamePanel.add(newGameLabel);
+		newGameLabel.setBounds(300, 250, 500, 80);
+		
+		newGameLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+		newGameLabel2.setForeground(new java.awt.Color(255, 255, 255));
+		newGameLabel2.setText("");	
+		newGameLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		gamePanel.add(newGameLabel2);
+		newGameLabel2.setBounds(300, 280, 500, 80);
 		
 		gamePanel.add(jSeparator1);
 		jSeparator1.setBounds(190, 50, 730, 10);
@@ -445,10 +465,13 @@ public class Gui extends javax.swing.JFrame {
 		hitButton.setEnabled(false);
 		standButton.setEnabled(false);
 		winLoseLabel.setText("");
+		newGameLabel.setText("");
 		jTextPane3.setText("");
 		jTextPane4.setText("");
 		jTextPane5.setText("");
 		jTextPane2.setText("");
+		newGameLabel.setText("New Game has started!");
+		newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
 	}//GEN-LAST:event_newGameButtonActionPerformed
 
 	//************************************************************************************************************************
@@ -465,6 +488,8 @@ public class Gui extends javax.swing.JFrame {
 		newGameInstance.resetRound();
 		newGameInstance.setRoundCount(newGameInstance.getRoundCount()+1);
 		winLoseLabel.setText("");
+		newGameLabel.setText("");
+		newGameLabel2.setText("");
 		jTextPane3.setText(""+newGameInstance.getRoundCount());
 
 
@@ -748,6 +773,8 @@ public class Gui extends javax.swing.JFrame {
 	private javax.swing.JScrollPane winsPane;
 	private javax.swing.JLabel winslable;
 	private javax.swing.JLabel winLoseLabel;
+	private javax.swing.JLabel newGameLabel;
+	private javax.swing.JLabel newGameLabel2;
 	
 	// End of variables declaration//GEN-END:variables
 }
