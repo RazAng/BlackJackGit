@@ -2,9 +2,10 @@ package view;
 
 import javax.swing.*;
 
-
 import controller.ControllerLogic;
 
+import java.awt.Component;
+import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
@@ -41,6 +42,7 @@ public class Gui extends javax.swing.JFrame {
 	private javax.swing.JLabel dealercardhit;
 	private int hitCount = 0;
 	private int dhitCount = 0;
+	private int flag = 0;
 
 	private Timer lableTimer;
 	private Timer movingTimer;
@@ -441,55 +443,107 @@ public class Gui extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	//***************************************************************************************************************************
-	private void exitButtonActionPerformed(ActionEvent evt) {
+	private void exitButtonActionPerformed(ActionEvent evt) {		
 		//****************************************************************************************************************************
-		//close the frame
-		dispose(); 
+		int dialogButton = JOptionPane.YES_NO_OPTION;
+		int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to exit the game?", "BlackJack",dialogButton);
+		if(dialogResult==0)
+			dispose();      
+		
 	}
 	//****************************************************************************************************************************
 	private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
 		//****************************************************************************************************************************
-
-		sound("sounds/btnClick2.wav"); //play button sound
-		//start new game
-		newGameInstance = controller.StartNewGame();
-		newGameInstance.newGame(); // print "new game" 
-
-		//remove all the cards that were hit in previous rounds
-		if ((hitCount + dhitCount) > 0) { 
-			for (int i = 0; i < (hitCount + dhitCount); i++) {
-				gamePanel.remove(1);
+		if(flag==0){
+			flag=1;
+		
+			sound("sounds/btnClick2.wav"); //play button sound
+			//start new game
+			newGameInstance = controller.StartNewGame();
+			newGameInstance.newGame(); // print "new game" 
+	
+			//remove all the cards that were hit in previous rounds
+			if ((hitCount + dhitCount) > 0) { 
+				for (int i = 0; i < (hitCount + dhitCount); i++) {
+					gamePanel.remove(1);
+				}
+				gamePanel.repaint();
+				gamePanel.revalidate();
+				hitCount = 0; //reset hitCound for new round
+				dhitCount = 0;
 			}
-			gamePanel.repaint();
-			gamePanel.revalidate();
-			hitCount = 0; //reset hitCound for new round
-			dhitCount = 0;
+	
+			//set labels and buttons 
+			playercard1.setVisible(false);
+			playercard2.setVisible(false);
+			dealercard0.setVisible(false);
+			dealercard2.setVisible(false);
+			dealerlable.setText("Dealer : ");
+			playerlable.setText("Player : ");
+			dealerlable.setVisible(true);
+			playerlable.setVisible(true);
+			dealButton.setEnabled(true);
+			hitButton.setEnabled(false);
+			standButton.setEnabled(false);
+			winLoseLabel.setText("");
+			winLoseLabel2.setText("");
+			winLoseLabel3.setText("");
+			newGameLabel.setText("");
+			jTextPane3.setText("");
+			jTextPane4.setText("");
+			jTextPane5.setText("");
+			jTextPane2.setText("");
+			newGameLabel.setText("New Game has started!");
+			newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
+		}			
+		else{	
+			int dialogButton = JOptionPane.YES_NO_OPTION;
+			int dialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to start a new game?", "BlackJack",dialogButton);
+			if(dialogResult==0){	// new game button was pressed		    
+			
+				sound("sounds/btnClick2.wav"); //play button sound
+				//start new game
+				newGameInstance = controller.StartNewGame();
+				newGameInstance.newGame(); // print "new game" 
+		
+				//remove all the cards that were hit in previous rounds
+				if ((hitCount + dhitCount) > 0) { 
+					for (int i = 0; i < (hitCount + dhitCount); i++) {
+						gamePanel.remove(1);
+					}
+					gamePanel.repaint();
+					gamePanel.revalidate();
+					hitCount = 0; //reset hitCound for new round
+					dhitCount = 0;
+				}
+		
+				//set labels and buttons 
+				playercard1.setVisible(false);
+				playercard2.setVisible(false);
+				dealercard0.setVisible(false);
+				dealercard2.setVisible(false);
+				dealerlable.setText("Dealer : ");
+				playerlable.setText("Player : ");
+				dealerlable.setVisible(true);
+				playerlable.setVisible(true);
+				dealButton.setEnabled(true);
+				hitButton.setEnabled(false);
+				standButton.setEnabled(false);
+				winLoseLabel.setText("");
+				winLoseLabel2.setText("");
+				winLoseLabel3.setText("");
+				newGameLabel.setText("");
+				jTextPane3.setText("");
+				jTextPane4.setText("");
+				jTextPane5.setText("");
+				jTextPane2.setText("");
+				newGameLabel.setText("New Game has started!");
+				newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
+			}			
 		}
-
-		//set labels and buttons 
-		playercard1.setVisible(false);
-		playercard2.setVisible(false);
-		dealercard0.setVisible(false);
-		dealercard2.setVisible(false);
-		dealerlable.setText("Dealer : ");
-		playerlable.setText("Player : ");
-		dealerlable.setVisible(true);
-		playerlable.setVisible(true);
-		dealButton.setEnabled(true);
-		hitButton.setEnabled(false);
-		standButton.setEnabled(false);
-		winLoseLabel.setText("");
-		winLoseLabel2.setText("");
-		winLoseLabel3.setText("");
-		newGameLabel.setText("");
-		jTextPane3.setText("");
-		jTextPane4.setText("");
-		jTextPane5.setText("");
-		jTextPane2.setText("");
-		newGameLabel.setText("New Game has started!");
-		newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
+		
 	}//GEN-LAST:event_newGameButtonActionPerformed
-
+	
 	//************************************************************************************************************************
 	private void dealButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dealButtonActionPerformed
 		//*************************************************************************************************************************
@@ -655,7 +709,7 @@ public class Gui extends javax.swing.JFrame {
 			lableSize=0;
 			winLoseLabel.setText("Bust");
 			winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
-			winLoseLabel3.setText("If you what to start a new game, please click on 'NewGame' button");
+			winLoseLabel3.setText("If you what to start a new game, please click on 'New Game' button");
 			enlargeLable();
 			lableTimer.start();			
 			repaint();
@@ -720,7 +774,7 @@ public class Gui extends javax.swing.JFrame {
 		//animate win-lose label
 		winLoseLabel.setText(newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()));
 		winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
-		winLoseLabel3.setText("If you what to start a new game, please click on 'NewGame' button");
+		winLoseLabel3.setText("If you what to start a new game, please click on 'New Game' button");
 		lableSize=0;
 		enlargeLable();
 		lableTimer.start();
