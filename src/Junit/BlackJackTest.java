@@ -36,6 +36,7 @@ import org.junit.Test;
  * JUnit test 18- check for dealer BJ: player have BJ 
  * JUnit test 19- check if player lose
  * JUnit test 20- check if player win
+ * JUnit test 21- check player score in the end of a game 
  */
 
 public class BlackJackTest {	
@@ -781,4 +782,23 @@ public class BlackJackTest {
 		//test if player win
 		assertEquals("Win", game.winner(player, dealer));	   
      }	
+	/*******************************************************************************
+    * JUnit test 21- check player score in the end of a game 
+    ********************************************************************************/
+	@Test
+	public void test_CheckPlayerScoreAfterRound() {			
+		
+		Game game = new Game();	//new game	
+		
+		assertEquals(10, game.calculateScore(1, 5, "Win"));	//new round		
+		assertEquals(-20, game.calculateScore(2, 10, "Lose")); //new round	
+		
+        game = new Game();//new game     	
+		
+		assertEquals(42, game.calculateScore(1, 21, "BlackJack"));	//new round			
+		assertEquals(12, game.calculateScore(2, 10, "Lose"));//new round				
+		assertEquals(2, game.calculateScore(3, 5, "Lose"));	//new round	
+			
+	}	
+	
 }
