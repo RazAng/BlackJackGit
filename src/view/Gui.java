@@ -1,14 +1,10 @@
 package view;
 
 import javax.swing.*;
-
-
 import controller.ControllerLogic;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
-
 import model.Card;
 import model.Game;
 import model.Hand;
@@ -48,7 +44,7 @@ public class Gui extends javax.swing.JFrame {
 	private Timer movingTimer3;
 	private Timer movingTimer4;
 
-	int DELAY = 18; 
+	int DELAY = 15; 
 	int startY = 130;
 	int startX = 920;
 	int startY1 = 130;
