@@ -1,10 +1,14 @@
 package view;
 
 import javax.swing.*;
+
+
 import controller.ControllerLogic;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+
 import model.Card;
 import model.Game;
 import model.Hand;
@@ -15,9 +19,9 @@ import model.Hand;
  */
 public class Gui extends javax.swing.JFrame {
 
-	/************************************************************************************************************************
-	 * Variables
-	 * ***********************************************************************************************************************/
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	/**
 	 * controller instance
@@ -27,20 +31,23 @@ public class Gui extends javax.swing.JFrame {
 	 * game instance
 	 */
 	private Game newGameInstance;
+	/**
+	 * ***********************************************************************************************************************
+	 * labels and variables 
+	 * ***********************************************************************************************************************
+	 */
 
-	
 	private javax.swing.JLabel playercardhit;
 	private javax.swing.JLabel dealercardhit;
 	private int hitCount = 0;
 	private int dhitCount = 0;
-	Icon dealerCard1; //the image of the dealer's hidden card
-	Card hidden;
-	
-	//timers and variables for animation
+
+	private Timer lableTimer;
 	private Timer movingTimer;
 	private Timer movingTimer2;
 	private Timer movingTimer3;
 	private Timer movingTimer4;
+
 	int DELAY = 18; 
 	int startY = 130;
 	int startX = 920;
@@ -51,11 +58,16 @@ public class Gui extends javax.swing.JFrame {
 	int startY3 = 130;
 	int startX3 = 920;
 
-	/**************************************************************************************************************************
-	 * GUI CONSTRUCTOR - Creates new form Black_Jack_GUI
+	Icon dealerCard1; //the image of the dealer's hidden card
+	Card hidden;
+	private int lableSize=0;
+
+
+	/**
+	 * Creates new form Black_Jack_GUI
 	 *
 	 * @param controller
-	 *************************************************************************************************************************/
+	 */
 	public Gui(ControllerLogic controller) {
 		setAlwaysOnTop(true);
 
@@ -78,6 +90,8 @@ public class Gui extends javax.swing.JFrame {
 		movingTimer2=new Timer(DELAY, new TimerHandler1());
 		movingTimer3=new Timer(DELAY, new TimerHandler2());
 		movingTimer4=new Timer(DELAY, new TimerHandler3());
+		lableTimer= new Timer(15, new TimerHandler4());
+	
 
 	}
 
@@ -90,79 +104,95 @@ public class Gui extends javax.swing.JFrame {
 		SoundClass sound = new SoundClass(soundAddress);
 		return sound;
 	}
-
-	/*************************************************************************************************************************
+	/****************************************************************************************************************************
 	 * Animation Methods
-	 *************************************************************************************************************************/
-	private class TimerHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent actionEvent)
-		{
-			moveToDealer1();
-		}
-	} 
+	 ****************************************************************************************************************************/
+     private class TimerHandler implements ActionListener
+     {
+          public void actionPerformed(ActionEvent actionEvent)
+          {
+               moveToDealer1();
+          }
+     } 
 
-	private class TimerHandler1 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent actionEvent)
-		{
-			moveToPlayer1();
-		}
-	} 
-	private class TimerHandler2 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent actionEvent)
-		{
-			moveToDealer2();
-		}
-	} 
-	private class TimerHandler3 implements ActionListener
-	{
-		public void actionPerformed(ActionEvent actionEvent)
-		{
-			moveToPlayer2();         
-		}
-	} 
+     private class TimerHandler1 implements ActionListener
+     {
+          public void actionPerformed(ActionEvent actionEvent)
+          {
+               moveToPlayer1();
+          }
+     } 
+      private class TimerHandler2 implements ActionListener
+     {
+          public void actionPerformed(ActionEvent actionEvent)
+          {
+               moveToDealer2();
+          }
+     } 
+      private class TimerHandler3 implements ActionListener
+     {
+          public void actionPerformed(ActionEvent actionEvent)
+          {
+               moveToPlayer2();         
+          }
+     } 
+      private class TimerHandler4 implements ActionListener
+      {
+           public void actionPerformed(ActionEvent actionEvent)
+           {
+                enlargeLable();         
+           }
+      }  
 
-	private void moveToDealer1()
-	{
-		if(startX>=500 && startY>=70){
-			dealercard0.setBounds(startX, startY, 90, 120);
-			startX = startX-21;
-			startY = startY-3;         
-		}
-		else dealercard0.setBounds(500, 66, 90, 120);     
-	}
-	private void moveToPlayer1()
-	{
-		if(startX1>=500 && startY1<=370){
-			playercard1.setBounds(startX1, startY1, 90, 120);
-			startX1 = startX1-21;
-			startY1 = startY1+12;
-		} 
-		else playercard1.setBounds(500, 366, 90, 120);
-	}
-	private void moveToDealer2()
-	{
-		if(startX2>=530 && startY2>=70){
-			dealercard2.setBounds(startX2, startY2, 90, 120);
-			startX2 = startX2-21;
-			startY2 = startY2-3;
-		}
-		else dealercard2.setBounds(530, 66, 90, 120);     
-	}
-	private void moveToPlayer2()
-	{
-		if(startX3>=530 && startY3<=370){
-			playercard2.setBounds(startX3, startY3, 90, 120);
-			startX3 = startX3-21;
-			startY3 = startY3+12;
-		} 
-		else playercard2.setBounds(530, 366, 90, 120);
-	}
-	//***************************************************************************************************************************
+      private void enlargeLable(){
+    	  if(lableSize<25)
+    	  {
+    		  winLoseLabel.setFont(new java.awt.Font("Tahoma", 1, lableSize+1));
+    		  lableSize+=1;
+    	  }
+   		
+      }
+      
+     private void moveToDealer1()
+     {
+          if(startX>=500 && startY>=70){
+          dealercard0.setBounds(startX, startY, 90, 120);
+          startX = startX-21;
+          startY = startY-3;         
+          }
+          else dealercard0.setBounds(500, 66, 90, 120);     
+     }
+     private void moveToPlayer1()
+     {
+        if(startX1>=500 && startY1<=370){
+          playercard1.setBounds(startX1, startY1, 90, 120);
+          startX1 = startX1-21;
+          startY1 = startY1+12;
+          } 
+        else playercard1.setBounds(500, 366, 90, 120);
+     }
+     private void moveToDealer2()
+     {
+          if(startX2>=530 && startY2>=70){
+          dealercard2.setBounds(startX2, startY2, 90, 120);
+          startX2 = startX2-21;
+          startY2 = startY2-3;
+          }
+          else dealercard2.setBounds(530, 66, 90, 120);     
+     }
+     private void moveToPlayer2()
+     {
+        if(startX3>=530 && startY3<=370){
+          playercard2.setBounds(startX3, startY3, 90, 120);
+          startX3 = startX3-21;
+          startY3 = startY3+12;
+          } 
+        else playercard2.setBounds(530, 366, 90, 120);
+     }
 
-	/**
+    //***************************************************************************************************************************
+
+    /**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
 	 * regenerated by the Form Editor.
@@ -172,14 +202,13 @@ public class Gui extends javax.swing.JFrame {
 	private void initComponents() {
 
 		gamePanel = new javax.swing.JPanel();
+		exitButton = new javax.swing.JButton();
 		newGameButton = new javax.swing.JButton();
 		dealButton = new javax.swing.JButton();
 		standButton = new javax.swing.JButton();
 		hitButton = new javax.swing.JButton();
 		playerlable = new javax.swing.JLabel();
 		dealerlable = new javax.swing.JLabel();
-		winlosebox = new javax.swing.JScrollPane();
-		winlose = new javax.swing.JTextPane();
 		jSeparator1 = new javax.swing.JSeparator();
 		scorelable = new javax.swing.JLabel();
 		scorePane = new javax.swing.JScrollPane();
@@ -198,6 +227,7 @@ public class Gui extends javax.swing.JFrame {
 		Background = new javax.swing.JLabel();
 		dealercard0 = new javax.swing.JLabel();
 		dealercard2 = new javax.swing.JLabel();
+		winLoseLabel = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Black Jack");
@@ -215,6 +245,16 @@ public class Gui extends javax.swing.JFrame {
 		});
 		gamePanel.add(newGameButton);
 		newGameButton.setBounds(10, 540, 100, 30);
+
+		exitButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+		exitButton.setText("Exit");
+		exitButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				exitButtonActionPerformed(evt);
+			}
+		});
+		gamePanel.add(exitButton);
+		exitButton.setBounds(10, 10, 100, 30);
 
 		dealButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 		dealButton.setText("Deal");
@@ -258,17 +298,13 @@ public class Gui extends javax.swing.JFrame {
 		gamePanel.add(dealerlable);
 		dealerlable.setBounds(380, 90, 110, 17);
 
-		winlosebox.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-		winlose.setBackground(new java.awt.Color(0, 102, 51));
-		winlose.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 0), new java.awt.Color(0, 102, 0), new java.awt.Color(0, 102, 0), new java.awt.Color(0, 102, 0)));
-		winlose.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-		winlose.setForeground(new java.awt.Color(255, 255, 255));
-		winlose.setToolTipText("");
-		winlosebox.setViewportView(winlose);
-
-		gamePanel.add(winlosebox);
-		winlosebox.setBounds(10, 10, 110, 40);
+		winLoseLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+		winLoseLabel.setForeground(new java.awt.Color(255, 255, 255));
+		winLoseLabel.setText("");	
+		winLoseLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		gamePanel.add(winLoseLabel);
+		winLoseLabel.setBounds(510, 250, 130, 80);
+		
 		gamePanel.add(jSeparator1);
 		jSeparator1.setBounds(190, 50, 730, 10);
 
@@ -374,15 +410,20 @@ public class Gui extends javax.swing.JFrame {
 		setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
+	//***************************************************************************************************************************
+	private void exitButtonActionPerformed(ActionEvent evt) {
+		//****************************************************************************************************************************
+		//close the frame
+		dispose(); 
+	}
 	//****************************************************************************************************************************
 	private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
 		//****************************************************************************************************************************
 
-		//reset game and counters for new-game
+		sound("sounds/btnClick2.wav"); //play button sound
+		//start new game
 		newGameInstance = controller.StartNewGame();
 		newGameInstance.newGame(); // print "new game" 
-		newGameInstance.resetRound();	 //reset hands and deck 
-
 
 		//remove all the cards that were hit in previous rounds
 		if ((hitCount + dhitCount) > 0) { 
@@ -407,10 +448,11 @@ public class Gui extends javax.swing.JFrame {
 		dealButton.setEnabled(true);
 		hitButton.setEnabled(false);
 		standButton.setEnabled(false);
-		winlose.setText("");
+		winLoseLabel.setText("");
 		jTextPane3.setText("");
 		jTextPane4.setText("");
 		jTextPane5.setText("");
+		jTextPane2.setText("");
 	}//GEN-LAST:event_newGameButtonActionPerformed
 
 	//************************************************************************************************************************
@@ -425,9 +467,9 @@ public class Gui extends javax.swing.JFrame {
 
 		//reset round
 		newGameInstance.resetRound();
-		winlose.setText("");
-
-
+		newGameInstance.setRoundCount(newGameInstance.getRoundCount()+1);
+		winLoseLabel.setText("");
+		jTextPane3.setText(""+newGameInstance.getRoundCount());
 
 
 		if ((hitCount + dhitCount) > 0) { //remove all the cards that were hit in previous rounds
@@ -492,7 +534,7 @@ public class Gui extends javax.swing.JFrame {
 		startX1=920;
 		startX2=920;
 		startX3=920;
-
+		
 		//animate first card
 		moveToDealer1();
 		movingTimer.start();      
@@ -562,11 +604,19 @@ public class Gui extends javax.swing.JFrame {
 			dealercard0.setIcon(dealerCard1);//display the hidden card
 			dealerlable.setText("Dealer :   " + newGameInstance.getDealer().getHandSum(newGameInstance.getDealer()));
 			System.out.println("Player was bust");
-			winlose.setText("Bust");
 			hitButton.setEnabled(false);
 			dealButton.setEnabled(true);
 			standButton.setEnabled(false);
 			newGameButton.setEnabled(true);
+			newGameInstance.setLossCount(newGameInstance.getLossCount()+1);
+			jTextPane5.setText(""+newGameInstance.getLossCount());
+			jTextPane2.setText(""+newGameInstance.calculateScore(newGameInstance.getRoundCount(), newGameInstance.getPlayer().getHandSum(newGameInstance.getPlayer()), "Lose"));
+			
+			//animate winLose label
+			lableSize=0;
+			winLoseLabel.setText("Bust");
+			enlargeLable();
+			lableTimer.start();			
 			repaint();
 			revalidate();
 		}
@@ -576,31 +626,30 @@ public class Gui extends javax.swing.JFrame {
 
 	}//GEN-LAST:event_hitButtonActionPerformed
 
-	//****************************************************************************************************************************
+	//************************************************************************************************************************
 	private void standButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standButtonActionPerformed
-		//****************************************************************************************************************************
+		//************************************************************************************************************************
 		sound("sounds/Dealing_Stand.wav"); //play sound
 
-		//set dealer's new hand after 'hit'
-		Hand dealerHand = newGameInstance.getDealer().getHandParticipant();       
-		dealerHand = newGameInstance.stand();
+		Hand dealerHand = newGameInstance.getDealer().getHandParticipant();
+		dealerHand = newGameInstance.stand();//dealer's hand after hit until 17 or more
 		newGameInstance.getDealer().setHand(dealerHand);
 
-		dealerlable.setText(" " + dealerlable.getText()); //reset dealer's sum lable
+		dealerlable.setText(" " + dealerlable.getText());
 
 		//iterate through cards and re-display
 		Card dhitcard = null;
 		Iterator<Card> scan = (newGameInstance.getDealer().getHandParticipant().getHandArray()).iterator();
+		//gamePanel.remove(dealercard0);
 		dealercard0.setIcon(dealerCard1);//display the hidden card
 		while (scan.hasNext()) {
 			dhitCount++;
 			dhitcard = scan.next();
 
-			//start displaying the "hit" cards  
-			if (dhitCount > 2) {                 
+			if (dhitCount > 2) { //start displaying the "hit" cards                  
 				dealercardhit = new JLabel();
 				dealercardhit.setIcon(dhitcard.getimage());
-				//add and position new dealer cards
+				//add and position new dealer
 				gamePanel.add(dealercardhit, 1);
 				dealercardhit.setBounds((530 + (30 * (dhitCount - 2))), 70, 90, 110); //position the new hit card image
 				gamePanel.repaint();
@@ -608,26 +657,35 @@ public class Gui extends javax.swing.JFrame {
 			}
 		}
 
-		//display hands sum 
 		dealerlable.setText("Dealer : " + newGameInstance.getDealer().getHandSum(newGameInstance.getDealer())); //get the whole sum including the hidden card
 		playerlable.setText("Player : " + newGameInstance.getPlayer().getHandSum(newGameInstance.getPlayer()));
 
-		//play sound according to win/lose
+		//play sound and update win/loss textbox
 		if (newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()) == "Win") {
 			sound("sounds/youWin.wav");
+			newGameInstance.setWinCount(newGameInstance.getWinsCount()+1);
+			jTextPane4.setText(""+newGameInstance.getWinsCount());
 		} else if (newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()) == "Lose") {
 			sound("sounds/lose.wav");
+			newGameInstance.setLossCount(newGameInstance.getLossCount()+1);
+			jTextPane5.setText(""+newGameInstance.getLossCount());
 		} else {
 			sound("sounds/blackjack.wav");
+			newGameInstance.setWinCount(newGameInstance.getWinsCount()+1);
+			jTextPane4.setText(""+newGameInstance.getWinsCount());
 		}
 
-		//set labels and buttons
-		winlose.setText(newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()));
+		jTextPane2.setText(""+newGameInstance.calculateScore(newGameInstance.getRoundCount(), newGameInstance.getPlayer().getHandSum(newGameInstance.getPlayer()), newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer())));
+		//animate win-lose label
+		winLoseLabel.setText(newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()));
+		lableSize=0;
+		enlargeLable();
+		lableTimer.start();
+		//set buttons
 		hitButton.setEnabled(false);
 		standButton.setEnabled(false);
 		dealButton.setEnabled(true);
 		newGameButton.setEnabled(true);
-
 	}//GEN-LAST:event_standButtonActionPerformed
 
 	/**
@@ -667,6 +725,7 @@ public class Gui extends javax.swing.JFrame {
 	//    }
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
+	private javax.swing.JButton exitButton;
 	private javax.swing.JLabel Background;
 	private javax.swing.JButton dealButton;
 	private javax.swing.JLabel dealercard0;
@@ -690,9 +749,9 @@ public class Gui extends javax.swing.JFrame {
 	private javax.swing.JScrollPane scorePane;
 	private javax.swing.JLabel scorelable;
 	private javax.swing.JButton standButton;
-	private javax.swing.JTextPane winlose;
-	private javax.swing.JScrollPane winlosebox;
 	private javax.swing.JScrollPane winsPane;
 	private javax.swing.JLabel winslable;
+	private javax.swing.JLabel winLoseLabel;
+	
 	// End of variables declaration//GEN-END:variables
 }
