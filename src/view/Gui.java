@@ -48,7 +48,7 @@ public class Gui extends javax.swing.JFrame {
 	private Timer movingTimer3;
 	private Timer movingTimer4;
 
-	int DELAY = 18; 
+	int DELAY = 15; 
 	int startY = 130;
 	int startX = 920;
 	int startY1 = 130;
