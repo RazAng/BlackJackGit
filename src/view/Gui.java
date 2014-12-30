@@ -36,6 +36,7 @@ public class Gui extends javax.swing.JFrame {
 	 * ***********************************************************************************************************************
 	 */
 
+	private javax.swing.JLabel showHiddenCard;
 	private javax.swing.JLabel playercardhit;
 	private javax.swing.JLabel dealercardhit;
 	private int hitCount = 0;
@@ -591,7 +592,9 @@ public class Gui extends javax.swing.JFrame {
 			dcard = dscan.next();
 			if (count == 0) {
 				hidden=dcard;
-				dealerCard1 = new ImageIcon("" + dcard.getimage()); //save the hidden card image for later use
+				//create new jLable and save the image of the 'hidden' card
+				showHiddenCard=new JLabel();
+				showHiddenCard.setIcon(dcard.getimage()); 
 			} else {
 				dealercard2.setIcon(dcard.getimage());
 			}
@@ -612,7 +615,7 @@ public class Gui extends javax.swing.JFrame {
 			count++;
 		}
 
-		dealercard0.setIcon(new ImageIcon("card_back.jpg")); //set the first dealer card to have the "hidden card" image
+		dealercard0.setIcon(new ImageIcon(getClass().getResource("/model/images/card_back.jpg"))); //set the first dealer card to have the "hidden card" image
 
 		//--------------- START DEAL ANIMATION-----------  
 
@@ -692,7 +695,7 @@ public class Gui extends javax.swing.JFrame {
 		{
 			sound("sounds/lose.wav");//play lose sound
 
-			dealercard0.setIcon(dealerCard1);//display the hidden card
+			dealercard0.setIcon(showHiddenCard.getIcon());//display the hidden card
 			dealerlable.setText("Dealer :   " + newGameInstance.getDealer().getHandSum(newGameInstance.getDealer()));
 			System.out.println("Player was bust");
 			hitButton.setEnabled(false);
@@ -734,7 +737,7 @@ public class Gui extends javax.swing.JFrame {
 		Card dhitcard = null;
 		Iterator<Card> scan = (newGameInstance.getDealer().getHandParticipant().getHandArray()).iterator();
 		//gamePanel.remove(dealercard0);
-		dealercard0.setIcon(dealerCard1);//display the hidden card
+		dealercard0.setIcon(showHiddenCard.getIcon());//display the hidden card
 		while (scan.hasNext()) {
 			dhitCount++;
 			dhitcard = scan.next();
