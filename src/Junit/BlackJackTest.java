@@ -14,7 +14,7 @@ import model.Suit;
 
 import org.junit.Test;
 
-/** Junit test class for Blackjack
+/** Junit test class for Blackjack.
  * @author Maayan 
  * JUnit test 1-  check for sum of the dealer hand = 5 
  * JUnit test 2-  check for sum of the dealer hand = 24 
