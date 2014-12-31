@@ -493,7 +493,7 @@ public class Gui extends javax.swing.JFrame {
 			jTextPane5.setText("");
 			jTextPane2.setText("");
 			newGameLabel.setText("New Game has started!");
-			newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
+			newGameLabel2.setText("Click 'Deal' to strat a new round");
 		}			
 		else{	
 			int dialogButton = JOptionPane.YES_NO_OPTION;
@@ -537,7 +537,7 @@ public class Gui extends javax.swing.JFrame {
 				jTextPane5.setText("");
 				jTextPane2.setText("");
 				newGameLabel.setText("New Game has started!");
-				newGameLabel2.setText("Please click the 'Deal' button to strat a new round");
+				newGameLabel2.setText("Click 'Deal' to strat a new round");
 			}			
 		}
 		
@@ -709,8 +709,8 @@ public class Gui extends javax.swing.JFrame {
 			//animate winLose label
 			lableSize=0;
 			winLoseLabel.setText("Bust");
-			winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
-			winLoseLabel3.setText("If you what to start a new game, please click on 'New Game' button");
+			winLoseLabel2.setText("Click 'Deal' to start a new round");
+			winLoseLabel3.setText("Click 'New Game' to start a new game");
 			enlargeLable();
 			lableTimer.start();			
 			repaint();
@@ -774,8 +774,8 @@ public class Gui extends javax.swing.JFrame {
 		jTextPane2.setText(""+newGameInstance.calculateScore(newGameInstance.getRoundCount(), newGameInstance.getPlayer().getHandSum(newGameInstance.getPlayer()), newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer())));
 		//animate win-lose label
 		winLoseLabel.setText(newGameInstance.winner(newGameInstance.getPlayer(), newGameInstance.getDealer()));
-		winLoseLabel2.setText("Please click on 'Deal' button to start a new round");
-		winLoseLabel3.setText("If you what to start a new game, please click on 'New Game' button");
+		winLoseLabel2.setText("Click 'Deal' to start a new round");
+		winLoseLabel3.setText("Click 'New Game' to start a new game");
 		lableSize=0;
 		enlargeLable();
 		lableTimer.start();
