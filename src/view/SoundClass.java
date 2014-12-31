@@ -14,7 +14,7 @@ public class SoundClass {
 
 	public SoundClass(String fileName) {
 		try {		
-			AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(fileName));
+			AudioInputStream audio = AudioSystem.getAudioInputStream(getClass().getResource(fileName));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audio);
 			clip.start();	
