@@ -73,6 +73,8 @@ public class Gui extends javax.swing.JFrame {
 		setAlwaysOnTop(true);
 
 		initComponents();
+		//setUndecorated(true);
+		setResizable(true);
 
 		this.controller = controller;//new controller instance
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -235,7 +237,7 @@ public class Gui extends javax.swing.JFrame {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Black Jack");
 		setMinimumSize(null);
-		setUndecorated(true);
+		//setUndecorated(true);
 
 		gamePanel.setLayout(null);
 
